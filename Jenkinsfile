@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+    environment {
+        DOCKERHUB_CREDENTIALS= credentials('dockerhub')
+    }
     stages {
         stage('Build') {
             steps {
@@ -68,7 +70,7 @@ pipeline {
                 echo 'Deploy'
                 docker-compose  build  deploy
                 docker-compose  up -d deploy
-                docker login -u credentials('dockerhub') --password-stdin
+                docker login -u $DOCKERHUB_CREDENTIALS --password-stdin
                 docker push adriandabrowski/jenkins:tagname
                 
                 '''
