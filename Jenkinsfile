@@ -8,6 +8,7 @@ pipeline {
                 sh '''
                 echo 'Build '
                 docker-compose  build  build-agent
+                sh 'echo "Build DATA" > build.txt'
                 '''
             }
                   
@@ -61,6 +62,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
+                archiveArtifacts(artifacts: '**/*.txt', followSymlinks: false)
                 sh '''
                 echo 'Deploy'
                 docker-compose  build  deploy
