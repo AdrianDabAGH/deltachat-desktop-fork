@@ -6,6 +6,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                
                 sh '''
                 echo 'Build '
                 docker-compose  build  build-agent
