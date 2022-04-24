@@ -70,7 +70,7 @@ pipeline {
                 echo 'Deploy'
                 docker-compose  build  deploy
                 docker-compose  up -d deploy
-                docker login -u $DOCKERHUB_CREDENTIALS --password-stdin
+                echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS --password-stdin
                 docker push adriandabrowski/jenkins:tagname
                 
                 '''
