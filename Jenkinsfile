@@ -35,6 +35,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh '''
+
                 echo 'Testing'
                 docker-compose  build  test-agent
                 docker-compose  up --force-recreate -d test-agent
@@ -67,11 +68,17 @@ pipeline {
                 echo 'Deploy'
                 docker-compose  build  deploy
                 docker-compose  up -d deploy
+                docker login -u credentials('dockerhub') --password-stdin
+                docker push adriandabrowski/jenkins:tagname
+                
                 '''
             }
 
                post {
-                   
+                   always{
+                       sh 'docker logout'
+                   }
+
                     success {
                     echo 'Success DEPLOY!'
                     emailext attachLog: true,
