@@ -71,7 +71,7 @@ pipeline {
                 docker-compose  build  deploy
                 docker-compose  up -d deploy
                 echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
-                docker push adriandabrowski/jenkins:tagname
+                docker push adriandabrowski/deploy:latest
                 
                 '''
             }
