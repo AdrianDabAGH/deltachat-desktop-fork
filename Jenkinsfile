@@ -6,7 +6,6 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-        
                 sh '''
                 echo 'Build '
                 docker-compose  build  build-agent
@@ -42,7 +41,7 @@ pipeline {
                 docker-compose  build  test-agent
                 docker-compose  up --force-recreate -d test-agent
                 '''
-                
+
             }
                post {
                 success {
