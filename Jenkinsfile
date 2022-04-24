@@ -10,7 +10,7 @@ pipeline {
                 sh '''
                 echo 'Build '
                 docker-compose  build  build-agent
-                docker-compose  logs > build_logs.txt
+                docker-compose logs > build_logs.txt
                 '''
             }
                   
