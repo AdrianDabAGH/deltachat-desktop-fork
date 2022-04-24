@@ -1,11 +1,13 @@
-import { describe } from 'mocha';
-import { expect, assert } from 'chai';
-import fs from 'fs';
-import path from 'path';
+import { describe } from 'mocha'
+import { expect, assert } from 'chai'
+import fs from 'fs'
+import path from 'path'
 import { translate } from '../../../src/shared/localize'
 
-describe('/shared/localize', () => { // the tests container
-  it('translation files should be valid json', () => { // the single test
+describe('/shared/localize', () => {
+  // the tests container
+  it('translation files should be valid json', () => {
+    // the single test
     const dir = path.join(__dirname, '../../../_locales')
     fs.readdir(dir, (err, files) => {
       if (err) {
@@ -19,9 +21,7 @@ describe('/shared/localize', () => { // the tests container
           path.basename(f) !== '_untranslated_en.json'
       )
       const name = (f: string) => f.split('.')[0]
-      expect(xmlFiles.map(name)).to.deep.eq(
-        jsonFiles.map(name)
-      )
+      expect(xmlFiles.map(name)).to.deep.eq(jsonFiles.map(name))
       const testFile = (file: string) => {
         let json: any = null
         try {
@@ -36,7 +36,9 @@ describe('/shared/localize', () => { // the tests container
             const v2 = v1[k2]
             if (typeof v2 !== 'string') {
               console.error(
-                `> ${JSON.stringify(v2)} not a string (${file} -> ${k1} -> ${k2})`
+                `> ${JSON.stringify(
+                  v2
+                )} not a string (${file} -> ${k1} -> ${k2})`
               )
               return false
             }
@@ -66,10 +68,8 @@ describe('/shared/localize', () => { // the tests container
           })
         })
       }
-      expect(
-        jsonFiles.every(f => testFile(path.join(dir, f))),
-      ).to.eq(true)
-    });
+      expect(jsonFiles.every(f => testFile(path.join(dir, f)))).to.eq(true)
+    })
   })
 
   it('translations methods should work as expected', () => {
@@ -89,7 +89,5 @@ describe('/shared/localize', () => { // the tests container
     expect(tx('test_a', ['asd', 'dsa'])).to.eq('foo asd dsa blubb')
     expect(tx('test_b', ['asd', 'dsa'])).to.eq('fo2o asd dsa blu2bb')
     expect(tx('test_b')).to.eq('fo2o %s %d blu2bb')
-
   })
-});
-
+})
