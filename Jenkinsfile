@@ -42,6 +42,7 @@ pipeline {
                 docker-compose  build  test-agent
                 docker-compose  up --force-recreate -d test-agent
                 '''
+                
             }
                post {
                 success {
