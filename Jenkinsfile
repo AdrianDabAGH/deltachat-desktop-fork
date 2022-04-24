@@ -8,7 +8,7 @@ pipeline {
                 sh '''
                 echo 'Build '
                 docker-compose  build  build-agent
-                echo "Build Success" > build.txt
+                echo  docker-compose logs > build_logs.txt
                 '''
             }
                   
