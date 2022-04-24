@@ -12,8 +12,3 @@ services:
       dockerfile: ./test-agent/Dockerfile
     depends_on:
       - build-agent
-  deploy:
-    image: build-agent:latest
-    build:
-      context: .
-      dockerfile: ./build-agent/Dockerfile

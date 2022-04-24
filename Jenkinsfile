@@ -68,11 +68,10 @@ pipeline {
                 archiveArtifacts(artifacts: '**/*.txt', followSymlinks: false)
                 sh '''
                 echo 'Deploy'
-                docker-compose  build  deploy
-                docker-compose  up -d deploy
+                docker-compose  up -d build-agent
                 echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
                 docker images
-                docker tag deploy:latest adriandabrowski/jenkins
+                docker tag build-agent:latest adriandabrowski/jenkins
                 docker push adriandabrowski/jenkins
                 
                 '''
